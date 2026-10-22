@@ -1,3 +1,58 @@
+const { useState } = React
+
+function App() {
+  const [shirts, setShirts] = useState(tshirts)
+
+    function changeQuantity(title, quantity) {
+      setShirts(shirts.map(shirt => {
+        if (shirt.title === title) {
+          return { ...shirt, quantity: quantity }
+        }
+        return shirt
+      }))
+    }
+
+
+  return (
+    <div className="App">
+
+      <h1>My TShirt Shop</h1>
+
+      {shirts.map((shirt) => (
+
+        <TShirts key={shirt.title} shirt={shirt} changeQuantity={changeQuantity} />
+
+      ))}
+    </div>
+  )
+  
+}
+
+function TShirts(props) {
+  const options = []
+
+  for (let i = 1; i <= props.shirt.stock; i++) {
+    options.push(<option key={i} value={i}>{i}</option>)}
+
+    function quantityHandler(e) {}
+}
+  
+
+  return (
+
+    <div >
+      <img src={'images/' + props.shirt.image} alt={props.shirt.title} />
+      <h2>{props.shirt.title}</h2>
+      <p> $ {props.shirt.price}</p>
+{props.shirt.stock === 0 ? ("Out of Stock") : ( <div > <p>{props.shirt.stock} left!</p>
+<select>
+  {options}
+</select>
+</div> )}    </div>  
+
+)}
+
+
 const tshirts = [
   {
     title: 'Blue T-Shirt',
@@ -63,3 +118,6 @@ const tshirts = [
     quantity: 1
   }
 ]
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<App />)
+
